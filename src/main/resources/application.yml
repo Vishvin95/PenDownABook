@@ -6,7 +6,7 @@ paytm.payment:
     website: WEBSTAGING
     industryTypeId: Retail
     paytmUrl:  https://securegw-stage.paytm.in/order/process
-    callbackUrl: http://localhost:9000/pendownabook/payment/validate
+    callbackUrl: http://spring-boot-app:9000/pendownabook/payment/validate
     details:
       MID: ${paytm.payment.sandbox.merchantid}
       CHANNEL_ID: ${paytm.payment.sandbox.channelid}
