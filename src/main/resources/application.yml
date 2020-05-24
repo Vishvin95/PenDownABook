@@ -6,7 +6,7 @@ paytm.payment:
     website: WEBSTAGING
     industryTypeId: Retail
     paytmUrl:  https://securegw-stage.paytm.in/order/process
-    callbackUrl: http://206.189.134.249:9000/pendownabook/payment/validate
+    callbackUrl: http://206.189.134.249:8080/pendownabook/payment/validate
     details:
       MID: ${paytm.payment.sandbox.merchantid}
       CHANNEL_ID: ${paytm.payment.sandbox.channelid}
