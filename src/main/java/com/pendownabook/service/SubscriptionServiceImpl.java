@@ -99,7 +99,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 			subscription.setPaymentDate(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 			return subscriptionRepository.save(subscription);
 		} else {
-			subscriptionRepository.delete(subscription);
+			subscriptionRepository.deleteByOrderId(subscription.getOrderId());
 			return null;
 		}
 	}

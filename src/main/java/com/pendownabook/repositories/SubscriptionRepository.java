@@ -14,4 +14,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Subs
 	List<Subscription> findByUser(User user);
 
 	Subscription findByOrderId(String orderId);
+
+	void deleteByOrderId(String orderId);
 }
