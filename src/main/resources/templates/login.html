@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewreport" content="width=device-width, initial-scale =1.0">
+	<title>login</title>
+	
+	<!-- Website icon -->
+  	<link rel="shortcut icon" th:href="@{images/fevicon.png}" type="image/x-icon"/>  
+  	
+  	<!-- Imported stylesheets -->
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.min.css}" />
+	
+	<!-- Imported Scripts -->
+	
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" type="text/javascript"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.0/js/bootstrap.min.js}" type="text/javascript"></script>
+	
+	<!-- Other fonts and css -->
+	<link rel="stylesheet" href="https://use.font-awesome.com/releases/v5.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	
+	<!-- Custom stylesheets -->
+	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}" />
+	
+	<!-- Custom Scripts -->
+	<script th:src="@{js/login.js}"></script>	
+</head>
+<body>
+	<div class="container-fluid banner"> 
+		<div class="row">
+			<div class="col-md-12"> 
+				<nav class= "navbar navbar-md fixed-top" id="navbar">
+				<div class= "navbar-brand">
+					Pen Down A Book	
+				</div>
+				<ul class="nav">
+					<li class="nav-item">
+						<a class = "nav-link" th:href="@{/}"><i class="fa fa-fw fa-home"></i>HOME</a>
+					</li>					
+				</ul>
+			</nav>	
+			</div>
+			</div>		
+			<main class="login-form">
+    	<div class="modal-dialog text-center">
+	<div class="col-sm-9 main-section">
+		<div class="modal-content">
+			<div class="col-12 user-img">
+				<img th:src="@{images/faceimage.png}">
+			</div>
+			<div class="col-12 loginhead">
+				<p>Login</p>
+			</div>
+			<div class="col-12 form-input">
+				<form th:action="@{/login}" method="post">
+					<div th:if="${param.error}">
+						<div class="alert alert-danger">Invalid email or password.</div>
+					</div>
+					<div th:if="${param.logout}">
+						<div class="alert alert-info">You have been logged out.</div>
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control" placeholder="Enter Email" id="username" name="username">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="Enter Password" id="password" name="password">
+					</div>
+					<button type="submit" class="btn btn-success" >Login</button>
+				</form>
+			</div>
+			<div class="col-12 forgot">
+				<a href="" id="forgetbtn"> Forgot Password?</a>
+			</div>
+			
+			<div class="form-group">
+				<span>New user? <a th:href="@{/registration}">Register here</a></span>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+</main>
+</div>
+<div class="modal fade" id="modalForgetForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modforget">
+			<div class="col-12 text-center forgetHead">
+				<p>Forget Password</p>
+			</div>
+			<div class="col-12 form-input forgetpass">
+				<form action="">
+					<div class="form-group forgetformgroup">
+						<input type="email" class="form-control" placeholder="Enter Email">
+					</div>
+					<button type="submit" class="btn btn-success text-center buttonsubmit">
+						Submit
+					</button>
+				</form>
+			</div>
+  </div>
+</div>
+
+</div>
+
+	<footer class="page-footer font-small footerclass">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">
+			© 2020 Copyright: <a href="#"> PenDownABook</a>
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
+</body>
+</html>

@@ -1,0 +1,154 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Dashboard</title>
+
+<!-- Website icon -->
+<link rel="shortcut icon" th:href="@{images/fevicon.png}"
+	type="image/x-icon" />
+
+<!-- Imported stylesheets -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.min.css}" />
+
+<!-- Imported Scripts -->
+<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/webjars/bootstrap/4.3.0/js/bootstrap.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"
+	type="text/javascript"></script>
+
+<!-- Other fonts and css -->
+<link rel="stylesheet"
+	href="https://use.font-awesome.com/releases/v5.0.8/css/solid.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Tangerine">
+<link
+	href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lora"
+	rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu"
+	rel="stylesheet">
+
+<!-- Custom stylesheets -->
+<link rel="stylesheet" type="text/css" th:href="@{css/home.css}">
+
+<!-- Custom scripts -->
+<script th:src="@{js/api.js}" type="text/javascript"></script>
+
+</head>
+<body>
+	<nav class="navbar navbar-md bg-dark fixed-top" id="navbar">
+		<div class="navbar-brand">Pen Down A Book</div>
+		<ul class="nav">
+			<li class="nav-item" sec:authorize="isAuthenticated()"><a
+				class="nav-item" th:href="@{/logout}"><span class="fa fa-fw fa-sign-out mr-auto"></span>Logout</a></li>
+		</ul>
+	</nav>
+
+	<!-- Bootstrap row -->
+	<div class="row" id="body-row">
+		<!-- Sidebar -->
+		<div id="sidebar-container"
+			class="sidebar-expanded d-none d-md-block col-2" role="tablist"
+			aria-orientation="vertical">
+			<!-- Bootstrap List Group -->
+			<ul class="list-group sticky-top sticky-offset">
+				<!-- Separator with title -->
+				<!-- /END Separator -->
+				<!-- Menu with submenu -->
+				<li class="active"><a href="#"
+					class="bg-dark list-group-item list-group-item-action"
+					data-toggle="pill" id="v-pills-home-tab" role="tab"
+					aria-controls="v-pills-home" aria-selected="true">
+						<div class="d-flex w-100 justify-content-start align-items-center">
+							<span class="fa fa-fw fa-home mr-3"></span> <span
+								class="menu-collapsed">Home</span>
+						</div>
+				</a></li>
+				
+				<li><a href="#"
+					class="bg-dark list-group-item list-group-item-action"
+					data-toggle="pill" id="v-pills-purchase-tab" role="tab"
+					aria-controls="v-pills-purchase" aria-selected="false"
+					onclick="getUser()">
+						<div class="d-flex w-100 justify-content-start align-items-center">
+							<span class="fa fa-user fa-fw mr-3"></span> <span
+								class="menu-collapsed">My Profile</span>
+						</div>
+				</a></li>
+				<li><a href="#" 
+					class="bg-dark list-group-item list-group-item-action"
+					data-toggle="pill" id="v-pills-publish-tab" role="tab"
+					aria-controls="v-pills-publish" aria-selected="false"
+					onclick="getPublishingServices()">
+						<div class="d-flex w-100 justify-content-start align-items-center">
+							<span class="fa fa-upload fa-fw mr-3"></span> <span
+								class="menu-collapsed">Publish</span>
+						</div>
+				</a></li>
+
+				<li><a href="#"
+					class="bg-dark list-group-item list-group-item-action"
+					data-toggle="pill" id="v-pills-proofreading-tab" role="tab"
+					aria-controls="v-pills-proofreading" aria-selected="false"
+					onclick="getProofreadingServices()">
+						<div class="d-flex w-100 justify-content-start align-items-center">
+							<span class="fa fa-upload fa-fw mr-3"></span> <span
+								class="menu-collapsed">Proofreading</span>
+						</div>
+				</a></li>
+				<li><a href="#"
+					class="bg-dark list-group-item list-group-item-action"
+					data-toggle="pill" id="v-pills-mybooks-tab" role="tab"
+					aria-controls="v-pills-mybooks" aria-selected="false"
+					onclick="getPreviewBooks()">
+						<div class="d-flex w-100 justify-content-start align-items-center">
+							<span class="fa fa-book fa-fw mr-3"></span> <span
+								class="menu-collapsed">My Books</span>
+						</div>
+				</a></li>
+
+				<li><a href="#"
+					class="bg-dark list-group-item list-group-item-action"
+					data-toggle="pill" id="v-pills-purchase-tab" role="tab"
+					aria-controls="v-pills-purchase" aria-selected="false"
+					onclick="getBooksForPurchase()">
+						<div class="d-flex w-100 justify-content-start align-items-center">
+							<span class="fa fa-book fa-fw mr-3"></span> <span
+								class="menu-collapsed">Purchase Books</span>
+						</div>
+				</a></li>
+				
+			</ul>
+			<!-- List Group END-->
+		</div>
+		<!-- sidebar-container END -->
+		
+		<!-- MAIN -->
+		<div class="container main-container">
+			<div class="tab-content" id="v-pills-tabContent">
+				<h2>
+					Welcome <em><span id= "emailuser" sec:authentication="principal.username">User</span></em>
+				</h2>
+				<hr>
+				<div class=" tab-pane fade active show homedashboard"
+					id="content" role="tabpanel" aria-labelledby="v-pills-home-tab">
+						
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- body-row END -->
+</body>
+</html>

@@ -1,0 +1,132 @@
+body {
+}
+
+.sticky-offset {
+    top: 56px;
+    background-color: #333;
+}
+
+#body-row {
+    margin-left:0;
+    margin-right:0;
+}
+#sidebar-container {
+    min-height: 100vh;   
+    background-color: #333;
+    padding: 0;
+}
+
+/* Sidebar sizes when expanded and expanded */
+.sidebar-expanded {
+    width: 230px;
+}
+.sidebar-collapsed {
+    width: 60px;
+}
+
+/* Menu item*/
+#sidebar-container .list-group a {
+    height: 50px;
+    color: white;
+
+}
+
+/* Submenu item*/
+#sidebar-container .list-group .sidebar-submenu a {
+    height: 45px;
+    padding-left: 30px;
+}
+.sidebar-submenu {
+    font-size: 0.9rem;
+}
+
+/* Separators */
+.sidebar-separator-title {
+    background-color: #333;
+    height: 35px;
+}
+.sidebar-separator {
+    background-color: #333;
+    height: 25px;
+}
+.logo-separator {
+    background-color: #333;    
+    height: 60px;
+}
+
+/* Closed submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+  content: " \f0d7";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 10px;
+}
+/* Opened submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+  content: " \f0da";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 10px;
+}
+.navbar{
+  background-color: #333;
+}
+.navbar .navbar-brand{
+  color: #fff;
+  font-family: 'Tangerine',serif;
+  font-size:1.8em;
+  font-weight: 700;
+}
+.dropdown-menu a{
+  background-color: #333
+}
+.nav li a{
+  color: #fff;
+  font-size:1.0em;
+}
+/* .homedashboard h1{
+  margin-left: 20%;
+  
+}
+.publishdashboard h1{
+  margin-left: 20%;
+
+}
+.mybookdashboard h1{
+  margin-left: 20%;
+
+}
+.purchasedashboard h1{
+  margin-left: 20%;
+
+}
+*/
+.main-container{
+	margin-top: 52px;
+	content: " \f0da";
+  font-family: FontAwesome;
+  padding-left: 10px;
+  
+}
+
+.main-container h2{
+	font-family: FontAwesome;
+  
+}
+.card-subscription{
+	width:333px;
+	border-radius: 15px;
+}
+.card-subscription a{
+	border-radius: 15px;
+	background-color:Gray;
+	color:#fff;
+}
+
+.card-buybooks{
+	margin-bottom:2%;
+	width:333px;
+	height: 250px;
+}

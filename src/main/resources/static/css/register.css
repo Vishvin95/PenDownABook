@@ -1,0 +1,105 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	font-family: 'Roboto',sans-serif;
+
+}
+.banner{
+	height:100vh;
+	width:100%;
+	background: url('../images/banner.jpg');
+	background-position: top;
+	background-size: cover;
+	/*background-repeat: no-repeat;*/	
+}
+.banner .navbar{
+	
+}
+.banner .navbar-brand{
+	color: #fff;
+	font-family: 'Tangerine',serif;
+	font-size:1.8em;
+	font-weight: 700;
+}
+.banner .nav li a{
+	color: #aaa;
+	font-size:1.2em;
+}
+
+.main-section{
+	margin: 0 auto;
+	margin-top: 128px;
+	padding: 0;
+
+}
+.modal-content{
+	background-color: #fff;
+	opacity: 0.9;
+	padding: 0 18px;
+	border-radius: 10px;
+	width: 500px;
+
+}
+.user-img img{
+	height: 120px;
+	width: 120px;
+}
+.user-img{
+	margin-top: -60px;
+	margin-bottom: 45px;
+}
+.form-group{
+	margin-bottom: 25px;
+
+}
+.form-group input{
+	height: 42px;
+	border-radius: 5px;
+	border: 2 solid black;
+	font-size: 18px;
+	letter-spacing: 2px;
+
+}
+/*.form-group::before{
+	font-family: 'Font Awesome\ 5 Free';
+	content: "\f1fa";
+	position: absolute;
+	font-size: 22px;
+	left:28px;
+	padding-top: 4px;
+	color: #555e60;
+}
+.form-group:last-of-type::before{
+	content: "\f023";
+}*/
+.form-input button{
+	width:40%;
+	margin:5px 0 25px;
+
+}
+.btn-success{
+	background-color: #1c6288;
+	font-size: 19px;
+	border-radius: 5px;
+	padding: 7px 14px;
+	border: 1px solid;
+}
+.btn-success:hover{
+	 background-color: #13445e;
+	 border: 1px solid #daf1ff;
+}
+.forgot{
+	padding:5px 0 25px;
+}
+.forgot a{
+	color: #000;
+	
+}
+.registerhead{
+	color: #000;
+	font-size: 25px;
+}
+#terms{
+	letter-spacing:0px;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewreport" content="width=device-width, initial-scale =1.0">
+	<title>HomePage</title>
+	
+	<!-- Website icon -->
+  	<link rel="shortcut icon" th:href="@{images/fevicon.png}" type="image/x-icon"/>  
+	
+	<!-- Imported stylesheets -->
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.min.css}" />
+	
+	<!-- Imported Scripts -->
+	<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}" type="text/javascript"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.0/js/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" type="text/javascript"></script>
+	
+	<!-- Other fonts and css -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- Custom stylesheets -->
+	<link rel="stylesheet" type="text/css" th:href="@{css/index.css}" />
+	
+	<!-- Custom Scripts -->
+	<script th:src="@{js/index.js}"></script>
+	<script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+	
+</head>
+<body>
+	<div class="container-fluid	 banner">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-md bg fixed-top" id="navbar">
+					<div class="navbar-brand">Pen Down A Book</div>
+					<ul class="nav">
+						<li class="nav-item"><a class="nav-link" th:href="@{/}"><i
+								class="fa fa-fw fa-home"></i>HOME</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/login}"><i
+								class="fa fa-fw fa-user"></i>LOGIN</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#services_home"><i style="font-size: 20px" class="fa">&#xf05a;</i>ABOUT</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="#footerclass"><i
+								class="fa fa-fw fa-envelope"></i>CONTACT</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-8 offset-md-2 info">
+				<h1 class="text-center">Pen Down A Book</h1>
+				<h4 class="text-center">The Place where Aspiring Writers meet
+					Publishers</h4>
+				<a th:href="@{/login}" class=" btn btn-md text text-center">GET
+					STARTED</a>
+			</div>
+
+		</div>
+	</div>
+	<div class="container" id="services_home">
+	<section class="py-5 text-center" >
+		<div class="container shadow">
+			<h2 class="text-center">Pen Down A Book's Services</h2>
+			<p class="text-muted mb-5 text-center">There are many services available for the users to avail
+				 passages of Lorem Ipsum available, but the majority have suffered
+				alteration in some form.</p>
+			<div class="row">
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<svg class="lnr text-primary services-icon">
+              			<use xlink:href="#lnr-pencil"></use>
+            		</svg>
+					<h6>ProofReading</h6>
+					<p class="text-muted">The service to correct surface errors in
+						writing, such as grammatical, spelling, punctuation and other
+						language mistakes.</p>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<svg class="lnr text-primary services-icon">
+              			<use xlink:href="#lnr-file-add"></use>
+            		</svg>
+					<h6>Book Review by Renowned Publishers</h6>
+					<p class="text-muted">Get your own book reviewed by some of the
+						best-known publishers of the industry and give your dreams a wing.</p>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<svg class="lnr text-primary services-icon">
+              			<use xlink:href="#lnr-book"></use>
+            		</svg>
+					<h6>Purchase Newly Published Books</h6>
+					<p class="text-muted">The platform provides the facility to buy
+						some of the recently published books of different genres.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	</div>
+
+	<section class="py-5 text-center" id="team">
+		<div class="container shadow">
+			<h2 class="text-center">Meet The Team</h2>
+			<p class="text-muted mb-5 text-center"></p>
+			<div class="row">
+				<!-- Team Member 1 -->
+				<div class="col-6">
+					<div class="card border-0 shadow "
+						style="width: 50%; margin-left: 250px">
+						<img th:src="@{images/vishwesh.png}" class="card-img-top" alt="...">
+						<div class="card-body text-center">
+							<h5 class="card-title mb-0">Vishwesh Vinchurkar</h5>
+							<div class="card-text text-black-50">Team Member</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Team Member 2 -->
+				<div class="col-6">
+					<div class="card border-0 shadow " style="width: 50%">
+						<img th:src="@{images/aditya.png}" class="card-img-top" alt="...">
+						<div class="card-body text-center">
+							<h5 class="card-title mb-0">Aditya Bakliwal</h5>
+							<div class="card-text text-black-50">Team Member</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<footer class="page-footer font-small pt-4 footerclass" id="footerclass">
+
+		<!-- Footer Links -->
+		<div class="container-fluid text-center text-md-left">
+
+			<!-- Grid row -->
+			<div class="row">
+
+				<!-- Grid column -->
+				<div class="col-md-4 mt-md-0 mt-3">
+
+					<!-- Content -->
+					<h5 class="text-uppercase">CONTACT</h5>
+					<p><i class="fa fa-phone"></i> Call Us:<br>
+					+91-9752515721<br>
+					+91-8130805182</p>
+
+				</div>
+				<!-- Grid column -->
+
+				<hr class="clearfix w-100 d-md-none pb-3">
+
+				<!-- Grid column -->
+				<div class="col-md-4 mb-md-0 mb-3">
+
+					<!-- Links -->
+					<h5 class="text-uppercase">CONNECT WITH US</h5>
+
+					<ul class="list-unstyled">
+						<li><a href="#!"><i class="fa fa-facebook-official"></i> Facebook</a></li>
+						<li><a href="#!"><i class="fa fa-instagram"></i> Instagram</a></li>
+						<li><a href="#!"><i class="fa fa-twitter"></i> Twitter</a></li>
+						<li><a href="#!"><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
+					</ul>
+
+				</div>
+				<!-- Grid column -->
+				
+				<!-- Grid column -->
+				<div class="col-md-4 mb-md-0 mb-3">
+
+					<!-- Links -->
+					<h5 class="text-uppercase">USEFUL LINKS</h5>
+
+					<ul class="list-unstyled">
+						<li><a href="#!"><i class="fa fa-info"></i> About</a></li>
+						<li><a href="#!"><i class="fa fa-phone"></i> Contact</a></li>
+						<li><a href="#!"><i class="fa fa-support"></i> Support</a></li>
+						<li><a href="#!"><i class="fa fa-legal"></i> Terms And Condition</a></li>
+					</ul>
+
+				</div>
+				<!-- Grid column -->	
+
+			</div>
+			<!-- Grid row -->
+
+		</div>
+		<!-- Footer Links -->
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">
+			© 2020 Copyright: <a href="#">
+				PenDownABook</a>
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+</body>
+</html>
