@@ -8,13 +8,14 @@ body{
 .banner{
 	height:100vh;
 	width:100%;
-	background: url('../images/banner.jpg');
+	background: url('../images/bannerr.jpg');
+	opacity:0.9;
 	background-position: top;
 	background-size: cover;
 	/*background-repeat: no-repeat;*/	
 }
 .banner .navbar{
-	
+	background-color: #892f2f;
 }
 .banner .navbar-brand{
 	color: #fff;
@@ -23,7 +24,7 @@ body{
 	font-weight: 700;
 }
 .banner .nav li a{
-	color: #aaa;
+	color: #fff;
 	font-size:1.2em;
 }
 
@@ -79,7 +80,7 @@ body{
 
 }
 .btn-success{
-	background-color: #1c6288;
+	background-color: #892f2f;
 	font-size: 19px;
 	border-radius: 5px;
 	padding: 7px 14px;
@@ -97,7 +98,9 @@ body{
 	
 }
 .registerhead{
-	color: #000;
+	color: #892f2f;
+	font-weight:700;
+	letter-spacing:2px;
 	font-size: 25px;
 }
 #terms{

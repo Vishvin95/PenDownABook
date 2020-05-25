@@ -9,6 +9,7 @@ body{
 	height:100vh;
 	width:100%;
 	background: url('../images/bannerr.jpg');
+	opacity:0.9;
 	background-position: top;
 	background-size: cover;
 	background-repeat: no-repeat;	

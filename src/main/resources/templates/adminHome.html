@@ -33,6 +33,9 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lora"
 	rel="stylesheet">
+<link 
+	href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" 
+	rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu"
 	rel="stylesheet">
@@ -45,13 +48,12 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-md bg-dark fixed-top" id="navbar">
+	<nav class="navbar navbar-md fixed-top" id="navbar">
 		<div class="navbar-brand">Pen Down A Book</div>
 		<ul class="nav">
 			<li class="nav-item" sec:authorize="isAuthenticated()"><a
-				class="nav-item" th:href="@{/logout}"> <span
-					class="fa fa-fw fa-sign-out mr-auto"></span>Logout
-			</a></li>
+				class="nav-item" th:href="@{/logout}">
+				<span class="fa fa-fw fa-sign-out mr-auto"></span>Logout</a></li>
 		</ul>
 	</nav>
 
@@ -68,7 +70,7 @@
 				<!-- Menu with submenu -->
 
 				<li class="active"><a th:href="@{/admin}"
-					class="bg-dark list-group-item list-group-item-action" role="tab"
+					class="list-group-item list-group-item-action" role="tab"
 					aria-selected="true">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-fw fa-home mr-3"></span> <span
@@ -77,26 +79,24 @@
 				</a></li>
 
 				<li><a th:href="@{/admin/profile}"
-					class="bg-dark list-group-item list-group-item-action" role="tab"
+					class="list-group-item list-group-item-action" role="tab"
 					aria-selected="false">
 						<div class="d-flex w-100 justify-content-start align-items-center">
-							<span class="fa fa-question fa-fw mr-3"></span> <span
+							<span class="fa fa-user fa-fw mr-3"></span> <span
 								class="menu-collapsed">My Profile</span>
 						</div>
 				</a></li>
 
-				<li><a th:href="@{/admin/genre}"
-					class="bg-dark list-group-item list-group-item-action" role="tab"
-					aria-selected="false">
+				<li><a th:href="@{/admin/genre}" class="list-group-item list-group-item-action"
+					role="tab" aria-selected="false">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-upload fa-fw mr-3"></span> <span
 								class="menu-collapsed">Genres</span>
 						</div>
 				</a></li>
 
-				<li><a th:href="@{/admin/service}"
-					class="bg-dark list-group-item list-group-item-action" role="tab"
-					aria-selected="false">
+				<li><a th:href="@{/admin/service}" class="list-group-item list-group-item-action"
+					role="tab" aria-selected="false">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-upload fa-fw mr-3"></span> <span
 								class="menu-collapsed">Services</span>
@@ -104,13 +104,14 @@
 				</a></li>
 
 				<li><a th:href="@{/admin/publisher}"
-					class="bg-dark list-group-item list-group-item-action" role="tab"
+					class="list-group-item list-group-item-action" role="tab"
 					aria-selected="false">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-upload fa-fw mr-3"></span> <span
 								class="menu-collapsed">Publishers</span>
 						</div>
 				</a></li>
+				
 			</ul>
 			<!-- List Group END-->
 		</div>
@@ -118,16 +119,14 @@
 		<!-- MAIN -->
 		<div class="container main-container">
 			<div class="tab-content" id="v-pills-tabContent">
-				<h1 style="margin-top: 15%">
+				<h2>
 					Welcome <span th:text="${accountFor}"></span>
 					<hr>
-				</h1>
+				</h2>
 
 				<div class=" tab-pane fade active show homedashboard"
 					id="v-pills-home" role="tabpanel"
 					aria-labelledby="v-pills-home-tab">
-					
-				<!-- Profile -->	
 					<th:block th:if="${myProfile}">
 						<table class="table shadow">
 							<thead>
@@ -158,7 +157,7 @@
 							</tbody>
 						</table>
 					</th:block>
-
+					
 					<!-- Genre -->
 					<th:block th:if="${newGenre}">
 						<div class="container">
@@ -196,7 +195,7 @@
 						</div>
 
 						<center>
-							<em><h3>List of Genres</h3></em>
+							<h3>List of Genres</h3>
 						</center>
 						<table class="table table-striped">
 							<tr>
@@ -268,7 +267,7 @@
 						</div>
 
 						<center>
-							<em><h3>List of Services</h3></em>
+							<h3>List of Services</h3>
 						</center>
 						<table class="table table-striped">
 							<tr>
@@ -298,16 +297,14 @@
 							</tr>
 						</table>
 					</th:block>
-
-					<!-- Publisher -->
 					<th:block th:if="${newPublisher}">
 						<div class="container">
-							<button type="button" class="btn btn-info btn-lg"
-								id="publisherBtn">Add Publisher</button>
-
+							<button type="button" class="btn btn-info btn-lg" id="publisherBtn">Add
+								Publisher</button>
+							<hr>
 							<!-- Modal -->
-							<div class="modal fade" id="publisherModal" tabindex="-1"
-								role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+							<div class="modal fade" id="publisherModal" tabindex="-1" role="dialog"
+								aria-labelledby="modalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->
@@ -355,10 +352,10 @@
 								</div>
 							</div>
 						</div>
-
 						<center>
-							<em><h3>List of Available Publishers</h3></em>
+							<h3>List of Available Publishers</h3>
 						</center>
+
 						<table class="table table-striped">
 							<tr>
 								<th>First Name</th>
@@ -378,20 +375,18 @@
 								<td th:text="${publisher.publisherLicenseNumber}" />
 								<td th:text="${publisher.email}" />
 								<td th:text="${publisher.contact}" />
-								<td><a
-									th:href="@{/admin/editpublisher/{id}(id=${publisher.id})}"
+								<td><a th:href="@{/admin/edit/{id}(id=${publisher.id})}"
 									class="btn btn-primary"> <i class="fa fa-edit editBtn">Edit</i>
 								</a></td>
-								<td><a
-									th:href="@{/admin/deletepublisher/{id}(id=${publisher.id})}"
+								<td><a th:href="@{/admin/deletepublisher/{id}(id=${publisher.id})}"
 									class="btn btn-danger"> <i class="fa fa-trash">Delete</i>
 								</a></td>
 							</tr>
 						</table>
 					</th:block>
 				</div>
+				<!-- Main Col END -->
 			</div>
-			<!-- Main Col END -->
 		</div>
 	</div>
 	<!-- body-row END -->

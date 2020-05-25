@@ -1,13 +1,14 @@
 var uri = "/pendownabook/"
-	
+function clear(){
+	$("#content").html("");
+}	
 function reviewBook(){
+	clear();
 	var email = $("#emailuser").text();
 	console.log(email);
 	var review="";
 	var tableHead="<center>" +
-					 "<em>" +
 						"<h3>" + "Available Books For Review" + "</h3>" +
-					 "</em>" +
 					"</center> " +
 					"<table class=\"table table-striped text-center\">" +
 						"<tr>" +
@@ -16,7 +17,6 @@ function reviewBook(){
 							"<th>Author</th>" +
 							"<th>Download Preview</th>" +
 							"<th>Status</th>" +
-							"<th>Save</th>" +
 						"</tr>";
 	var tableTail="</table>";
 	$.get(uri + "reviewstatus",function(reviewData,status){
@@ -52,7 +52,7 @@ function reviewBook(){
 						"<form method=\"post\" action=\"previewbook/createreview/" + email +"/" + previewBookId + "\">" +
 							"<select class=\"form-control\" name = \"reviewstatus\" id=\"reviewstatus\"> " +
 							"<option>Select Status</option>" +reviewStatusList+"</select>"+
-						"<input type=\"submit\"  class=\"form-control btn-success\" value=\"Submit\" id=\"submitBtn\" size=\"35\"></form>" +
+						"<center><input type=\"submit\"  class=\"form-control btn-success text-center\" value=\"Submit\" id=\"submitBtn\" size=\"35\"></center></form>" +
 					"</td>" +
 				"</tr>"; 
 			}

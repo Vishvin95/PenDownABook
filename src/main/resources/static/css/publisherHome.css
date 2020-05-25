@@ -1,3 +1,6 @@
+body {
+}
+
 #navbar{
 	background-color: #892f2f;
 }
@@ -36,6 +39,8 @@
     background-color:#cc0000;
 
 }
+
+
 /* Submenu item*/
 #sidebar-container .list-group .sidebar-submenu a {
     height: 45px;
@@ -75,9 +80,7 @@
   text-align: right;
   padding-left: 10px;
 }
-.navbar{
-  background-color: #333;
-}
+
 .navbar .navbar-brand{
   color: #fff;
   font-family: 'Tangerine',serif;
@@ -99,20 +102,15 @@
 .homedashboard b{
   color: #892f2f;
 }
-.homedashboard h3,legend{
+.homedashboard h3{
 	font-family: 'Pacifico', cursive;
 	letter-spacing: 2px;
   color: #892f2f;
   font-weight: 500;
 }
-.homedashboard td,label{
+.homedashboard td{
 font-size:1.3em;
   font-weight: 700;
-}
-.homedashboard label{
-font-size:1.3em;
-  font-weight: 700;
-  color:#892f2f;
 }
 .main-container{
 	margin-top: 52px;
@@ -127,54 +125,9 @@ font-size:1.3em;
   letter-spacing: 2px;
   color: #892f2f;
 }
-.card-header{
-	background-color:#892f2f;
-	font-size: 1.2em;
-}
-.card-subscription{
-	width:333px;
-	border-radius: 15px;
-}
-.card-subscription .btn{
-	border-radius: 15px;
-	background-color:#892f2f;
-	color:#fff;
-}
-.card-subscription .btn:hover{
-	background-color:#cc0000;
-}
-.card-subscription a{
-	border-radius: 15px;
-	background-color:#892f2f;
-	color:#fff;
-}
-
-.card-buybooks{
-	margin-bottom:2%;
-	width:333px;
-	height: 250px;
-}
-.card-buybooks .card-header{
-	background-color: #892f2f;
-	color:#fff;
-}
-
-.card-buybooks .btn{
-	color:#fff;
-	border-radius: 15px;
-	background-color: #892f2f;
-}
-.theaddark{
-	background-color:#892f2f;
-}
-.theaddark th{
-	color:#fff;
-}
 #submitBtn{
 	width:100px;
-	height:40px;
 	background-color:#892f2f;
 	border: 0;
 	border-radius: 10px;
-	color:#fff;'
 }

@@ -31,16 +31,16 @@
 	<title>register</title>
 </head>
 <body>
-	<div class="container-fluid banner"> 
-		<div class="row">
+	<div class="container-fluid banner "> 
+		<div class="row" >
 			<div class="col-md-12"> 
-				<nav class= "navbar navbar-md bg-dark fixed-top" id="navbar">
+				<nav class= "navbar navbar-md fixed-top" id="navbar">
 				<div class= "navbar-brand">
 					Pen Down A Book	
 				</div>
 				<ul class="nav">
 					<li class="nav-item">
-						<a class = "nav-link" th:href="@{/index}"><i class="fa fa-fw fa-home"></i>HOME</a>
+						<a class = "nav-link" th:href="@{/}"><i class="fa fa-fw fa-home"></i>HOME</a>
 					</li>				
 				</ul>
 			</nav>	
@@ -109,8 +109,12 @@
 					</div>
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
-						<input id="terms" type="checkbox" th:field="*{terms}" />   
-						<label class="control-label" for="terms"> I agree with the <a href="#">Terms and conditions</a>.
+
+						<input id="terms" type="checkbox" th:field="*{terms}" />
+						<label 
+							class="control-label" for="terms"> I agree with the <a
+							href="#">Terms and conditions</a> for Registration.
+
 						</label>
 						<p class="error-message"
 							th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation
@@ -127,6 +131,6 @@
 </div>
 </main>
 </div>
+
 </body>
 </html>
-
