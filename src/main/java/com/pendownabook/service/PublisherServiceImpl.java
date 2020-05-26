@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class PublisherServiceImpl implements PublisherService {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
+	private final static Logger logger = LoggerFactory.getLogger(PublisherServiceImpl.class);
+	
 	@Override
 	public List<Publisher> getAll() {		
 		return publisherRepository.findAll();
@@ -33,6 +37,7 @@ public class PublisherServiceImpl implements PublisherService {
 	@Override
 	public Publisher getByEmail(String email) {
 		Publisher publisher = publisherRepository.findByEmail(email);
+		logger.info("Find Publisher ");
 		return publisher;
 	}
 
@@ -49,6 +54,7 @@ public class PublisherServiceImpl implements PublisherService {
 		Publisher publisher =publisherRepository.findById(id).get();
 		publisher.setRoles(null);
 		publisherRepository.save(publisher);
+		logger.info("Publisher Deleted");
 		publisherRepository.deleteById(id);		
 	}
 
@@ -56,6 +62,7 @@ public class PublisherServiceImpl implements PublisherService {
 	public void savePublisher(Publisher publisher) {
 		publisher.setPassword(passwordEncoder.encode(publisher.getPassword()));
 		publisher = addPublisherRoles(publisher);
+		logger.info("Publisher Added");
 		publisherRepository.save(publisher);		
 	}
 

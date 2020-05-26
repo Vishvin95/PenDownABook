@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +38,17 @@ public class PreviewBookServiceImpl implements PreviewBookService {
 	@Autowired
 	private ReviewRepository reviewRepository;
 	
+	private final static Logger logger = LoggerFactory.getLogger(PreviewBookServiceImpl.class);
+	
 	@Override
 	public List<PreviewBook> getAll() {
+		logger.info("Finding all Preview books");
 		return previewBookRepository.findAll();
 	}
 	
 	@Override
 	public List<PreviewBook> getPreviewBook(String email){
+		logger.info("Finding Preview books");
 		return previewBookRepository.findByUser(userRepository.findByEmail(email));
 	}
 
@@ -64,7 +70,7 @@ public class PreviewBookServiceImpl implements PreviewBookService {
 		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date = ft.parse(formatDateTime);		
 		previewBook.setDateOfUpload(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-		
+		logger.info("Creating a new Preview Book");
 		return previewBookRepository.save(previewBook);
 	}
 
@@ -87,7 +93,7 @@ public class PreviewBookServiceImpl implements PreviewBookService {
 		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date = ft.parse(formatDateTime);
 		review.setDateOfReview(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-		
+		logger.info("Review Added By Publisher");
 		reviewRepository.save(review);
 	}
 

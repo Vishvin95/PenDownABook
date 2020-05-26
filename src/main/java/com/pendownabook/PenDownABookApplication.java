@@ -29,7 +29,7 @@ public class PenDownABookApplication {
 		private RoleService roleService;
 		private CustomerService customerService;
 		private UserService userService;
-		
+
 		@Autowired
 		private BCryptPasswordEncoder passwordEncoder;
 
@@ -46,9 +46,9 @@ public class PenDownABookApplication {
 				HashSet<Role> roles = new HashSet<>();
 				ArrayList<Service> services = new ArrayList<>();
 
-				// -----------Loading roles------------//			
+				// -----------Loading roles------------//
 				Role role = roleService.getByName("USER");
-				Role newRole=null;
+				Role newRole = null;
 				if (role == null) {
 					newRole = new Role();
 					newRole.setName("USER");
@@ -61,7 +61,7 @@ public class PenDownABookApplication {
 					newRole.setName("PUBLISHER");
 					roles.add(newRole);
 				}
-				
+
 				role = roleService.getByName("ADMIN");
 				if (role == null) {
 					newRole = new Role();
@@ -71,9 +71,9 @@ public class PenDownABookApplication {
 				roleService.saveAll(roles);
 
 				// ----------Loading Services-------------//
-				Service exist = customerService.getByServiceCode("S1"); 
+				Service exist = customerService.getByServiceCode("S1");
 				Service service;
-				if ( exist == null) {
+				if (exist == null) {
 					service = new Service();
 					service.setServiceCode("S1");
 					service.setServiceTitle("Publishing Service");
@@ -83,7 +83,7 @@ public class PenDownABookApplication {
 					services.add(service);
 				}
 
-				exist = customerService.getByServiceCode("S2"); 				
+				exist = customerService.getByServiceCode("S2");
 				if (exist == null) {
 					service = new Service();
 					service.setServiceCode("S2");
@@ -93,8 +93,8 @@ public class PenDownABookApplication {
 					service.setServiceCost(1500);
 					services.add(service);
 				}
-				
-				exist = customerService.getByServiceCode("S3"); 				
+
+				exist = customerService.getByServiceCode("S3");
 				if (exist == null) {
 					service = new Service();
 					service.setServiceCode("S3");
@@ -105,20 +105,19 @@ public class PenDownABookApplication {
 					services.add(service);
 				}
 				customerService.saveAll(services);
-				
-				//---------------Load admin user-----------------//			
+
+				// ---------------Load admin user-----------------//
 				User admin = userService.findByEmail("admin@gmail.com");
-				if(admin==null)
-				{
+				if (admin == null) {
 					User user = new User();
 					user.setFirstName("Admin");
 					user.setLastName("Minto");
 					user.setContact(9892990123l);
 					user.setEmail("admin@gmail.com");
-					user.setPassword(passwordEncoder.encode("admin"));																		
+					user.setPassword(passwordEncoder.encode("admin"));
 					user = userService.saveAdmin(user);
 				}
-				
+
 			} catch (Exception e) {
 
 			}

@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,7 +37,9 @@ public class UserServiceImpl implements UserService {
 	
 	@PersistenceContext
 	private EntityManager em;
-
+	
+	private final static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -55,7 +59,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByEmail(String email) {		
-		User user = userRepository.findByEmail(email);		
+		User user = userRepository.findByEmail(email);
+		logger.info("Fetching User");
 		return user;
 	}
 
@@ -71,6 +76,7 @@ public class UserServiceImpl implements UserService {
 		HashSet<Role> userRoles = new HashSet<>();
 		userRoles.add(roleRepository.findByName("USER"));
 		user.setRoles(userRoles);
+		logger.info("New User Added");
 		return userRepository.save(user);
 	}
 

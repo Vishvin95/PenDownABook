@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,6 +18,7 @@ import com.pendownabook.entities.User;
 import com.pendownabook.repositories.ServiceRepository;
 import com.pendownabook.repositories.SubscriptionRepository;
 import com.pendownabook.repositories.UserRepository;
+
 
 @org.springframework.stereotype.Service
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -27,9 +30,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
 	private ServiceRepository serviceRepository;
-
+	
+	private final static Logger logger = LoggerFactory.getLogger(SubscriptionServiceImpl.class);
+	
 	@GetMapping
 	public List<Subscription> getSubscription(String email) {
+		logger.info("Fetching Subscription");
 		return subscriptionRepository.findByUser(userRepository.findByEmail(email));
 
 	}
@@ -53,6 +59,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		subscription.setUser(user);
 		subscription.setService(service);
 		subscription.setOrderId(getOrderId(20));
+		logger.info("Subscrition Added");
 		return subscriptionRepository.save(subscription);
 	}
 
