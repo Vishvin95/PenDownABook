@@ -94,7 +94,7 @@ public class PenDownABookApplication {
 				reviewStatus = reviewStatusService.getByName("IN REVIEW");
 				if (reviewStatus == null) {
 					newReviewStatus = new ReviewStatus();
-					newReviewStatus.setName("IN PROGRESS");
+					newReviewStatus.setName("IN REVIEW");
 					newReviewStatus.setDescription("Preview Book is under review by publisher");
 					reviewStatuses.add(newReviewStatus);
 				}

@@ -50,7 +50,8 @@ public class PreviewBookRepositoryCustomImpl implements PreviewBookRepositoryCus
 				"   left join genre on preview_book.genre_id = genre.id" +
 				"   left join review_status on review_status_id = review_status.id" +
 				"   where publisher_id = " + publisher.getId() + 
-				"   and review_status.name not in (\"Accepted\",\"Rejected\");"
+				"   and (review_status.name not in (\"ACCEPTED\",\"REJECTED\")" + 
+				"   or review_status.name IS NULL);"
 				);		
 		
 		return query.getResultList();
