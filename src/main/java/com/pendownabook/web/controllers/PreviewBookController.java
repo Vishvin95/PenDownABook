@@ -4,7 +4,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +37,10 @@ public class PreviewBookController {
 
 	@Autowired
 	private UploadService uploadService;
-	
+
 	@Autowired
 	private ReviewStatusService reviewStatusService;
-	
+
 	@Autowired
 	private PublisherService publisherService;
 
@@ -68,12 +74,36 @@ public class PreviewBookController {
 
 	@RequestMapping(value = "/createreview/{email}/{previewBookId}", method = RequestMethod.POST)
 	public ModelAndView createReviewForPreviewBook(@PathVariable("email") String publisherEmail,
-			@PathVariable("previewBookId") Long previewBookId, @RequestParam("reviewstatus") Long reviewStatusId) throws ParseException{
-		
-			ReviewStatus reviewStatus = reviewStatusService.getByReviewStatusById(reviewStatusId);
-			Publisher publisher = publisherService.getByEmail(publisherEmail);
-			previewBookService.addPublisherReviewForPreviewBook(previewBookId,reviewStatus,publisher);
-		
+			@PathVariable("previewBookId") Long previewBookId, @RequestParam("reviewstatus") Long reviewStatusId)
+			throws ParseException {
+
+		ReviewStatus reviewStatus = reviewStatusService.getByReviewStatusById(reviewStatusId);
+		Publisher publisher = publisherService.getByEmail(publisherEmail);
+		previewBookService.addPublisherReviewForPreviewBook(previewBookId, reviewStatus, publisher);
+
 		return new ModelAndView("redirect:/publisher");
+	}
+
+	@RequestMapping(value = "/download/{fileName:.+}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+		// Load file as Resource
+		Resource resource = uploadService.loadFileAsResource(fileName);
+
+		// Try to determine file's content type
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+
+		}
+
+		if (contentType == null) {
+			contentType = "application/octet-stream";
+		}
+
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
 	}
 }

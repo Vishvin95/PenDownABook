@@ -23,7 +23,7 @@ public class SubscriptionController {
 	SubscriptionServiceImpl subscriptionService;
 
 	@GetMapping("/subscriptiondetails")
-	public List<Subscription> getSubscriptionForUser(@RequestParam(name = "email") String email) {
+	public List<Subscription> getActiveSubscriptionsForUser(@RequestParam(name = "email") String email) {
 		return subscriptionService.getSubscription(email);
 	}
 

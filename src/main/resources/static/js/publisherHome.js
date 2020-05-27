@@ -47,7 +47,7 @@ function reviewBook(){
 					"<td>"+title+"</td>"+
 					"<td>"+genre+"</td>"+
 					"<td>"+firstName +" "+lastName+"</td>"+
-					"<td><a href=\""+pdfPath+"\"> <i class=\"fa fa-fw fa-file-pdf-o \" style=\"font-size:24px\"></i>  </a></td>"+
+					"<td><a href=\"previewbook/download/"+pdfPath+"\"> <i class=\"fa fa-fw fa-file-pdf-o \" style=\"font-size:24px\"></i>  </a></td>"+
 					"<td>" + 
 						"<form method=\"post\" action=\"previewbook/createreview/" + email +"/" + previewBookId + "\">" +
 							"<select class=\"form-control\" name = \"reviewstatus\" id=\"reviewstatus\"> " +

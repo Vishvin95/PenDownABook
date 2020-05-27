@@ -9,6 +9,8 @@ import java.nio.file.StandardCopyOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,4 +50,20 @@ public class UploadServiceImpl implements UploadService {
 		}
 	}
 
+	@Override
+	public Resource loadFileAsResource(String fileName) {
+		try {
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                return resource;
+            } else {
+            	logger.error("File not found " + fileName);
+            	return null;            
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+	}
 }

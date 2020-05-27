@@ -2,8 +2,10 @@ package com.pendownabook.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -19,7 +21,6 @@ import com.pendownabook.repositories.ServiceRepository;
 import com.pendownabook.repositories.SubscriptionRepository;
 import com.pendownabook.repositories.UserRepository;
 
-
 @org.springframework.stereotype.Service
 public class SubscriptionServiceImpl implements SubscriptionService {
 	@Autowired
@@ -30,14 +31,34 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
 	private ServiceRepository serviceRepository;
-	
-	private final static Logger logger = LoggerFactory.getLogger(SubscriptionServiceImpl.class);
-	
-	@GetMapping
-	public List<Subscription> getSubscription(String email) {
-		logger.info("Fetching Subscription");
-		return subscriptionRepository.findByUser(userRepository.findByEmail(email));
 
+	private final static Logger logger = LoggerFactory.getLogger(SubscriptionServiceImpl.class);
+
+	@GetMapping
+	public List<Subscription> getSubscription(String userEmail) {
+		logger.info("Fetching Active Subscriptions");
+		
+		User user = userRepository.findByEmail(userEmail);
+		List<Subscription> subscriptions = subscriptionRepository.findByUser(user);
+		Iterator<Subscription> subscriptionIterator = subscriptions.iterator();
+		while (subscriptionIterator.hasNext()) {
+			if (!isActive(subscriptionIterator.next())) {
+				subscriptionIterator.remove();
+			}
+		}
+
+		return subscriptions;
+	}
+
+	private boolean isActive(Subscription subscription) {
+		Service service = serviceRepository.findById(subscription.getService().getId()).get();
+		int period = service.getServicePeriod();
+		LocalDateTime paymentDate = subscription.getPaymentDate();
+		
+		if(LocalDateTime.now().isBefore(paymentDate.plusMonths(period)))
+			return true;
+		else
+			return false;
 	}
 
 	public Subscription save(Subscription subscription) {
