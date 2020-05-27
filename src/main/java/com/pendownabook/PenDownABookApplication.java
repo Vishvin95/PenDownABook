@@ -11,11 +11,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.pendownabook.entities.ReviewStatus;
 import com.pendownabook.entities.Role;
 import com.pendownabook.entities.Service;
 import com.pendownabook.entities.User;
 import com.pendownabook.property.FileStorageProperties;
 import com.pendownabook.service.CustomerService;
+import com.pendownabook.service.ReviewService;
+import com.pendownabook.service.ReviewStatusService;
 import com.pendownabook.service.RoleService;
 import com.pendownabook.service.UserService;
 
@@ -34,15 +37,17 @@ public class PenDownABookApplication {
 		private RoleService roleService;
 		private CustomerService customerService;
 		private UserService userService;
+		private ReviewStatusService reviewStatusService;
 
 		@Autowired
 		private BCryptPasswordEncoder passwordEncoder;
 
 		@Autowired
-		public DatabaseLoader(RoleService roleService, CustomerService customerService, UserService userService) {
+		public DatabaseLoader(RoleService roleService, CustomerService customerService, UserService userService, ReviewStatusService reviewStatusService) {
 			this.roleService = roleService;
 			this.customerService = customerService;
 			this.userService = userService;
+			this.reviewStatusService = reviewStatusService;
 		}
 
 		@Override
@@ -50,6 +55,7 @@ public class PenDownABookApplication {
 			try {
 				HashSet<Role> roles = new HashSet<>();
 				ArrayList<Service> services = new ArrayList<>();
+				ArrayList<ReviewStatus> reviewStatuses = new ArrayList<>();
 
 				// -----------Loading roles------------//
 				Role role = roleService.getByName("USER");
@@ -74,6 +80,43 @@ public class PenDownABookApplication {
 					roles.add(newRole);
 				}
 				roleService.saveAll(roles);
+				
+				// -----------Loading review status------------//
+				ReviewStatus reviewStatus = reviewStatusService.getByName("UPLOADED");
+				ReviewStatus newReviewStatus = null;
+				if (reviewStatus == null) {
+					newReviewStatus = new ReviewStatus();
+					newReviewStatus.setName("UPLOADED");
+					newReviewStatus.setDescription("Preview Book Has Been uploaded");
+					reviewStatuses.add(newReviewStatus);
+				}
+				
+				reviewStatus = reviewStatusService.getByName("IN REVIEW");
+				if (reviewStatus == null) {
+					newReviewStatus = new ReviewStatus();
+					newReviewStatus.setName("IN PROGRESS");
+					newReviewStatus.setDescription("Preview Book is under review by publisher");
+					reviewStatuses.add(newReviewStatus);
+				}
+				
+				reviewStatus = reviewStatusService.getByName("ACCEPTED");
+				if (reviewStatus == null) {
+					newReviewStatus = new ReviewStatus();
+					newReviewStatus.setName("ACCEPTED");
+					newReviewStatus.setDescription("Preview Book Has Been accepted");
+					reviewStatuses.add(newReviewStatus);
+				}
+				
+				reviewStatus = reviewStatusService.getByName("REJECTED");
+				if (reviewStatus == null) {
+					newReviewStatus = new ReviewStatus();
+					newReviewStatus.setName("REJECTED");
+					newReviewStatus.setDescription("Preview Book Has Been rejected");
+					reviewStatuses.add(newReviewStatus);
+				}
+
+				reviewStatusService.saveAll(reviewStatuses);
+				
 
 				// ----------Loading Services-------------//
 				Service exist = customerService.getByServiceCode("S1");

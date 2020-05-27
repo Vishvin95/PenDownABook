@@ -1,5 +1,6 @@
 package com.pendownabook.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,17 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 	}
 
 	@Override
-	public ReviewStatus getByReviewStatusById(Long reviewStatusId) {		
+	public ReviewStatus getByReviewStatusById(Long reviewStatusId) {
 		return reviewStatusRepository.findById(reviewStatusId).get();
 	}
 
-	
+	@Override
+	public ReviewStatus getByName(String name) {
+		return reviewStatusRepository.findByName(name);
+	}
+
+	@Override
+	public void saveAll(ArrayList<ReviewStatus> reviewStatuses) {
+		reviewStatusRepository.saveAll(reviewStatuses);
+	}
 }
