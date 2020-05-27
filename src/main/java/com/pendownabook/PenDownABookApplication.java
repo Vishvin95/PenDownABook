@@ -7,17 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.pendownabook.entities.Role;
 import com.pendownabook.entities.Service;
 import com.pendownabook.entities.User;
+import com.pendownabook.property.FileStorageProperties;
 import com.pendownabook.service.CustomerService;
 import com.pendownabook.service.RoleService;
 import com.pendownabook.service.UserService;
 
 @SpringBootApplication
+@EnableConfigurationProperties({
+	FileStorageProperties.class
+})
 public class PenDownABookApplication {
 
 	public static void main(String[] args) {

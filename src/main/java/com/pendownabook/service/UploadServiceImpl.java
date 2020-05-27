@@ -8,30 +8,40 @@ import java.nio.file.StandardCopyOption;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pendownabook.property.FileStorageProperties;
+
 @Service
 public class UploadServiceImpl implements UploadService {
-	
+
 	private final static Logger logger = LoggerFactory.getLogger(UploadServiceImpl.class);
-	
-	
+	private final Path fileStorageLocation;
+
+	@Autowired
+	public UploadServiceImpl(FileStorageProperties fileStorageProperties) {
+		this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
+
+		try {
+			Files.createDirectories(this.fileStorageLocation);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	@Override
 	public String savePDF(MultipartFile previewBook, String uploadObject, String email) throws IOException {
 		if (uploadObject.equals("PreviewBook")) {
-			
-			if(previewBook.isEmpty())
-			{
+			if (previewBook.isEmpty()) {
 				System.out.println("Not found");
 				return " ";
-			}
-			else
-			{
-				Path path = Paths.get("previewbooks/" + previewBook.getOriginalFilename());
-				Files.copy(previewBook.getInputStream(), path,  StandardCopyOption.REPLACE_EXISTING);
+			} else {
+				Path targetLocation = this.fileStorageLocation.resolve(previewBook.getOriginalFilename());
+				Files.copy(previewBook.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 				logger.info("Preview Book Uploaded");
-				return path.toString();
+				return previewBook.getOriginalFilename();
 			}
 		} else {
 			return " ";
