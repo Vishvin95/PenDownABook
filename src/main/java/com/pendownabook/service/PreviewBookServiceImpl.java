@@ -104,7 +104,7 @@ public class PreviewBookServiceImpl implements PreviewBookService {
 			review.setPreviewBook(previewBookRepository.findById(previewBookId).get());
 			review.setDateOfReview(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 			reviewRepository.save(review);
-			logger.info("Review Added By Publisher");
+			logger.info("Review Added By Publisher: " + reviewStatus.getName());
 		} else {
 			Reviews reviews = opt.get();
 			reviews.setReviewStatus(reviewStatus);
