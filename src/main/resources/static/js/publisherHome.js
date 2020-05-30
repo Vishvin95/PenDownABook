@@ -16,19 +16,11 @@ function reviewBook(){
 							"<th>Genre</th>" +
 							"<th>Author</th>" +
 							"<th>Download Preview</th>" +
-							"<th>Status</th>" +
+							"<th>Current Status</th>" +
+							"<th>Update Status</th>" +
 						"</tr>";
 	var tableTail="</table>";
-	$.get(uri + "reviewstatus",function(reviewData,status){
-		console.log(reviewData);
-		var reviewStatusList= " ";
-		for(var i = 0;i < reviewData.length; i++)
-		{
-			reviewStatusList = reviewStatusList + "<option value=\""+ 
-			reviewData[i]["id"] +"\">" + 
-			reviewData[i]["name"] + "&nbsp;&nbsp;&nbsp;&nbsp;" + 
-			reviewData[i]["description"] + "</option>";
-		}
+	$.get(uri + "reviewstatus",function(reviewData,status){				
 		
 		$.get(uri + "previewbook/"+email,function(data,status){			
 			for(i=0;i<data.length;i++){
@@ -39,15 +31,44 @@ function reviewBook(){
 				var lastName = data[i][5];
 				var pdfPath = data[i][2];
 				var reviewStatus= data[i][8];
-					if(reviewStatus==null){
-						reviewStatus=reviewStatus+"Uploaded";
+				if(reviewStatus==null){
+					reviewStatus="UPLOADED";
+				}
+				else
+				{
+					for(var i = 0;i < reviewData.length; i++)
+					{
+						if(reviewData[i]["id"]==reviewStatus)
+							reviewStatus = reviewData[i]["name"];
 					}
+				}				
+				
+				var reviewStatusList= " ";
+				var flag = false;
+				for(var i = 0;i < reviewData.length; i++)
+				{
+					if(reviewStatus==reviewData[i]["name"])
+					{
+						flag = true;
+						continue;
+					}
+					
+					if(flag)
+					{
+						reviewStatusList = reviewStatusList + "<option value=\""+ 
+						reviewData[i]["id"] +"\">" + 
+						reviewData[i]["name"] + "&nbsp;&nbsp;&nbsp;&nbsp;" + 
+						reviewData[i]["description"] + "</option>";
+					}					
+				}
+				
 				review = review + 
 				"<tr>" +
 					"<td>"+title+"</td>"+
 					"<td>"+genre+"</td>"+
 					"<td>"+firstName +" "+lastName+"</td>"+
 					"<td><a href=\"previewbook/download/"+pdfPath+"\"> <i class=\"fa fa-fw fa-file-pdf-o \" style=\"font-size:24px\"></i>  </a></td>"+
+					"<td>"+reviewStatus+"</td>"+
 					"<td>" + 
 						"<form method=\"post\" action=\"previewbook/createreview/" + email +"/" + previewBookId + "\">" +
 							"<select class=\"form-control\" name = \"reviewstatus\" id=\"reviewstatus\"> " +
