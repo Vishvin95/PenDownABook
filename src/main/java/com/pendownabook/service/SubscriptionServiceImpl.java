@@ -81,7 +81,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		subscription.setService(service);
 		subscription.setOrderId(getOrderId(20));
 		logger.info("New Subscription : " + service.getServicePeriod());
-		logger.info("New Subscription : " + service.getServicePeriod());
+		logger.info("New Subscription : " + service.getServiceDescription());
 		return subscriptionRepository.save(subscription);
 	}
 
