@@ -22,8 +22,9 @@ function reviewBook(){
 	var tableTail="</table>";
 	$.get(uri + "reviewstatus",function(reviewData,status){				
 		
-		$.get(uri + "previewbook/"+email,function(data,status){			
-			for(i=0;i<data.length;i++){
+		$.get(uri + "previewbook/"+email,function(data,status){						
+			for(i=0;i<data.length;i++)
+			{
 				var previewBookId = data[i][0];
 				var title = data[i][3];
 				var genre = data[i][6];
@@ -36,18 +37,18 @@ function reviewBook(){
 				}
 				else
 				{
-					for(var i = 0;i < reviewData.length; i++)
+					for(var j = 0;j < reviewData.length; j++)
 					{
-						if(reviewData[i]["id"]==reviewStatus)
-							reviewStatus = reviewData[i]["name"];
+						if(reviewData[j]["id"]==reviewStatus)
+							reviewStatus = reviewData[j]["name"];
 					}
 				}				
 				
 				var reviewStatusList= " ";
 				var flag = false;
-				for(var i = 0;i < reviewData.length; i++)
+				for(var j = 0;j < reviewData.length; j++)
 				{
-					if(reviewStatus==reviewData[i]["name"])
+					if(reviewStatus==reviewData[j]["name"])
 					{
 						flag = true;
 						continue;
@@ -56,9 +57,9 @@ function reviewBook(){
 					if(flag)
 					{
 						reviewStatusList = reviewStatusList + "<option value=\""+ 
-						reviewData[i]["id"] +"\">" + 
-						reviewData[i]["name"] + "&nbsp;&nbsp;&nbsp;&nbsp;" + 
-						reviewData[i]["description"] + "</option>";
+						reviewData[j]["id"] +"\">" + 
+						reviewData[j]["name"] + "&nbsp;&nbsp;&nbsp;&nbsp;" + 
+						reviewData[j]["description"] + "</option>";
 					}					
 				}
 				
