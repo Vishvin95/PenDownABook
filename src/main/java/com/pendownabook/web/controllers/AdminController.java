@@ -35,56 +35,31 @@ public class AdminController {
 	@Autowired
 	private CustomerService custService;
 
-	private boolean isProfileRedirected = false;
-	private boolean isPublisherRedirected = false;
-	private boolean isGenreRedirected = false;
-	private boolean isServiceRedirected = false;
-
 	@RequestMapping
 	public ModelAndView home(HttpServletRequest request, Authentication authentication) {
-		ModelAndView adminHome = new ModelAndView();
-		if (request.isRequestedSessionIdValid()) {
-			adminHome.clear();
-			if (isProfileRedirected) {
-				adminHome.addObject("myProfile", userService.findByEmail(authentication.getName()));
-				isProfileRedirected = false;
-			} else if (isPublisherRedirected) {
-				adminHome.addObject("existingPublishers", publisherService.getAll());
-				adminHome.addObject("newPublisher", new Publisher());
-				isPublisherRedirected = false;
-			} else if (isGenreRedirected) {
-				adminHome.addObject("existingGenres", genreService.getAll());
-				adminHome.addObject("newGenre", new Genre());
-				isGenreRedirected = false;
-			} else if (isServiceRedirected) {
-				adminHome.addObject("existingServices", custService.getAllServices());
-				adminHome.addObject("newService", new Service());
-				isServiceRedirected = false;
-			}
-			adminHome.addObject("accountFor", authentication.getName());
-			adminHome.setViewName("adminHome");
-			return adminHome;
-		} else {
-			return new ModelAndView("index");
-		}
+		return getCommonModel(request, authentication);
 	}
 
 	@GetMapping("/profile")
-	public String profile(HttpServletRequest request) {
-		if (request.isRequestedSessionIdValid()) {
-			isProfileRedirected = true;
-			return "redirect:/admin";
-		} else
-			return "index";
+	public ModelAndView profile(HttpServletRequest request, Authentication authentication) {
+
+		ModelAndView adminHome = getCommonModel(request, authentication);
+		if (adminHome.hasView()) {
+			adminHome.addObject("myProfile", userService.findByEmail(authentication.getName()));
+			adminHome.addObject("accountFor", authentication.getName());
+		}
+		return adminHome;
 	}
 
 	@GetMapping("/publisher")
-	public String getPublishers(HttpServletRequest request) {
-		if (request.isRequestedSessionIdValid()) {
-			isPublisherRedirected = true;
-			return "redirect:/admin";
-		} else
-			return "index";
+	public ModelAndView getPublishers(HttpServletRequest request, Authentication authentication) {
+		ModelAndView adminHome = getCommonModel(request, authentication);
+		if (adminHome.getViewName().equals("adminHome")) {
+			adminHome.addObject("existingPublishers", publisherService.getAll());
+			adminHome.addObject("newPublisher", new Publisher());
+			adminHome.addObject("accountFor", authentication.getName());
+		}
+		return adminHome;
 	}
 
 	@PostMapping("/savepublisher")
@@ -103,12 +78,14 @@ public class AdminController {
 	}
 
 	@GetMapping("/genre")
-	public String getAllGenres(HttpServletRequest request) {
-		if (request.isRequestedSessionIdValid()) {
-			isGenreRedirected = true;
-			return "redirect:/admin";
-		} else
-			return "index";
+	public ModelAndView getAllGenres(HttpServletRequest request, Authentication authentication) {
+		ModelAndView adminHome = getCommonModel(request, authentication);
+		if (adminHome.getViewName().equals("adminHome")) {
+			adminHome.addObject("existingGenres", genreService.getAll());
+			adminHome.addObject("newGenre", new Genre());
+			adminHome.addObject("accountFor", authentication.getName());
+		}
+		return adminHome;
 	}
 
 	@PostMapping("/savegenre")
@@ -127,12 +104,13 @@ public class AdminController {
 	}
 
 	@GetMapping("/service")
-	public String getAllServices(HttpServletRequest request) {
-		if (request.isRequestedSessionIdValid()) {
-			isServiceRedirected = true;
-			return "redirect:/admin";
-		} else
-			return "index";
+	public ModelAndView getAllServices(HttpServletRequest request, Authentication authentication) {
+		ModelAndView adminHome = getCommonModel(request, authentication);
+		if (adminHome.getViewName().equals("adminHome")) {
+			adminHome.addObject("existingServices", custService.getAllServices());
+			adminHome.addObject("newService", new Service());
+		}
+		return adminHome;
 	}
 
 	@PostMapping("/saveservice")
@@ -150,4 +128,11 @@ public class AdminController {
 		return "redirect:/admin/service";
 	}
 
+	private ModelAndView getCommonModel(HttpServletRequest request, Authentication authentication) {
+		if (request.isRequestedSessionIdValid()) {
+			return new ModelAndView("adminHome").addObject("accountFor", authentication.getName());
+		} else {
+			return new ModelAndView("index");
+		}
+	}
 }
