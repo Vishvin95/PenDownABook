@@ -1,1 +1,1 @@
-# Platoform to connect avid writers to publishers
+# Platform to connect avid writers to publishers
