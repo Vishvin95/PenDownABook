@@ -1,9 +1,13 @@
 package com.pendownabook.web.controllers.dto;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
 
 import com.pendownabook.constraint.FieldMatch;
@@ -13,26 +17,29 @@ import com.pendownabook.constraint.FieldMatch;
 })
 public class UserRegistrationDto {
 
-	@NotEmpty
+	@NotEmpty(message = "Required")
 	private String firstName;
 
-	@NotEmpty
+	@NotEmpty(message = "Required")
 	private String lastName;
 
-	@NotEmpty
+	@NotEmpty(message = "Required")
+//	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$")
 	private String password;
 
-	@NotEmpty
+	@NotEmpty(message = "Required")
 	private String confirmPassword;
 
 	@Email
-	@NotEmpty
+	@NotEmpty(message = "Required")
 	private String email;	
 	
 	@NonNull
+	@DecimalMin(value = "1000000000", message = "The contact should have 10 digits")
+	@DecimalMax(value = "9999999999", message = "The contact should have 10 digits")
 	private Long contact;
 
-	@AssertTrue
+	@AssertTrue(message = "Please accept the terms and conditions")
 	private Boolean terms;
 
 	public String getFirstName() {
